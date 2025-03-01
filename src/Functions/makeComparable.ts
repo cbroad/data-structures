@@ -1,9 +1,9 @@
-import { stringify } from "./stringify";
+import { stringify } from "@/Functions/stringify";
 
-export function makeComparable<T>( x:T ):T|string {
-    switch( typeof( x ) ) {
+export function makeComparable<T>(x: T): T | string {
+    switch (typeof (x)) {
         case "object": // Comparisons of Objects and Arrays are in
-            return stringify( x );
+            return stringify(x);
         default:
             return x;
     }

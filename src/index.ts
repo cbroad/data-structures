@@ -1,7 +1,8 @@
-export * as Functions from "./Functions";
-export * from "./Interfaces";
-export * from "./Implementations";
-import * as Implementations from "./Implementations";
+export * as Functions from "@/Functions";
+export * from "@/Implementations";
+export * from "@/Interfaces";
+
+import * as Implementations from "@/Implementations";
 
 
 // Multiple avenues to look up implementations, depending on

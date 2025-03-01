@@ -1,8 +1,8 @@
-import { Collection } from "./Collection";
+import { Collection } from "@/Interfaces/Collection";
 
 export interface Stack<T> extends Collection<T> {
-    get top():T|undefined;
+    get top(): T | undefined;
 
-    pop():T|undefined;
-    push( value:T ):boolean;
+    pop(): T | undefined;
+    push(value: T): boolean;
 }

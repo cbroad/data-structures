@@ -1,12 +1,12 @@
-import { Queue } from "./Queue";
-import { Stack } from "./Stack";
+import { Queue } from "@/Interfaces/Queue";
+import { Stack } from "@/Interfaces/Stack";
 
 export interface Deque<T> extends Queue<T>, Stack<T> {
-    get last():T|undefined;
-    get top():T|undefined;
+    get last(): T | undefined;
+    get top(): T | undefined;
 
-    pop():T|undefined;
-    push( value:T ):boolean;
-    shift():T|undefined;
-    unshift( value:T ):boolean;
+    pop(): T | undefined;
+    push(value: T): boolean;
+    shift(): T | undefined;
+    unshift(value: T): boolean;
 }

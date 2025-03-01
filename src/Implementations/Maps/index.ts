@@ -1,3 +1,3 @@
-export * from "./HashMap";
-export * from "./LinkedHashMap";
-export * from "./TreeMap";
+export * from "@/Implementations/Maps/HashMap";
+export * from "@/Implementations/Maps/LinkedHashMap";
+export * from "@/Implementations/Maps/TreeMap";

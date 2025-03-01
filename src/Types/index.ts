@@ -1,2 +1,2 @@
-export * from "./Functions";
-export * from "./Parameters";
+export * from "@/Types/Functions";
+export * from "@/Types/Parameters";

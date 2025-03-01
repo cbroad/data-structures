@@ -1,6 +1,6 @@
-import { Collection } from "./Collection";
+import { Collection } from "@/Interfaces/Collection";
 
-export interface AsyncCollection<T> extends AsyncIterable<T>, Collection<T> {    
-    break():void;
-    resetAsync():void;
+export interface AsyncCollection<T> extends AsyncIterable<T>, Collection<T> {
+    break(): void;
+    resetAsync(): void;
 }

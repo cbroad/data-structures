@@ -1,4 +1,4 @@
-const DataStructures = require( ".." );
+const DataStructures = require("..");
 const COUNT = 100;
 
 const BinaryHeap = DataStructures.Structures.BinaryHeaps.BinaryHeap;
@@ -7,17 +7,17 @@ const BinaryHeap = DataStructures.Structures.BinaryHeaps.BinaryHeap;
 
 const heap = new BinaryHeap();
 
-for( let i=0 ; i<COUNT ; i++ ) {
-    if( Math.round( Math.random() ) ) {
-        let n = Math.floor( COUNT * Math.random() );
-        console.log( "adding %j", n );
-        heap.add( n );
+for (let i = 0; i < COUNT; i++) {
+    if (Math.round(Math.random())) {
+        let n = Math.floor(COUNT * Math.random());
+        console.log("adding %j", n);
+        heap.add(n);
     } else {
-        if( heap.size>0 ) {
+        if (heap.size > 0) {
             // let n = heap.toArray()[ Math.floor( heap.size * Math.random() ) ];
             // console.log( "removing %j", n );
             // console.log( heap.remove( n ) );
-            console.log( "removing %j", heap.removeFirst() );
+            console.log("removing %j", heap.removeFirst());
         }
     }
     // console.log( "%s", heap );
@@ -27,14 +27,14 @@ for( let i=0 ; i<COUNT ; i++ ) {
     // console.log( "maxDepth:%j", 2 * Math.log2( tree.length+1 ) );
 
     // console.log( tree.toJSON() );
-    console.log( heap.toArray() );
+    console.log(heap.toArray());
     // console.log( tree.length );
 }
 
 
-console.log( "%s", heap ); // JSON representation.
-console.log( "size:", heap.size );
-console.log( heap.toArray() );
+console.log("%s", heap); // JSON representation.
+console.log("size:", heap.size);
+console.log(heap.toArray());
 // console.log( tree.toArray() );
 // {
 //     let value;

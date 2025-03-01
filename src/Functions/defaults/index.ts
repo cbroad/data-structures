@@ -1,1 +1,1 @@
-export * from "./compare";
+export * from "@/Functions/defaults/compare";

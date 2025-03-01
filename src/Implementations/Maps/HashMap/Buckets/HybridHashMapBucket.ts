@@ -1,30 +1,30 @@
-import { HashMapBucket, HashMapEntry } from "../../../../Abstractions";
-import { ArrayHashMapBucket } from "./ArrayHashMapBucket";
-import { RBTreeHashMapBucket } from "./RBTreeHashMapBucket";
+import { HashMapBucket, HashMapEntry } from "@/Abstractions";
+import { ArrayHashMapBucket } from "@/Implementations/Maps/HashMap/Buckets/ArrayHashMapBucket";
+import { RBTreeHashMapBucket } from "@/Implementations/Maps/HashMap/Buckets/RBTreeHashMapBucket";
 
-enum BucketType { 
+enum BucketType {
     Array,
     // LinkedList,
     Tree,
 }
 
-export class HybridHashMapBucket<K,V> extends HashMapBucket<K,V> {
-    #bucket:HashMapBucket<K,V> = new ArrayHashMapBucket();
-    #type:BucketType = BucketType.Array;
+export class HybridHashMapBucket<K, V> extends HashMapBucket<K, V> {
+    #bucket: HashMapBucket<K, V> = new ArrayHashMapBucket();
+    #type: BucketType = BucketType.Array;
 
     *[Symbol.iterator](): Iterator<HashMapEntry<K, V>, any, undefined> { yield* this.#bucket; }
 
-    get bucket(): HashMapBucket<K,V> { return this.#bucket; } 
+    get bucket(): HashMapBucket<K, V> { return this.#bucket; }
     get size(): number { return this.#bucket.size; }
 
-    getByEntry(entry: HashMapEntry<K, unknown>): HashMapEntry<K,V> | undefined { return this.#bucket.getByEntry( entry ); }
+    getByEntry(entry: HashMapEntry<K, unknown>): HashMapEntry<K, V> | undefined { return this.#bucket.getByEntry(entry); }
 
-    removeByEntry(entry: HashMapEntry<K, unknown>): HashMapEntry<K,V> | undefined {
-        const result = this.#bucket.removeByEntry( entry );
-        if( result!==undefined ) {
-            if( this.#type===BucketType.Tree && this.size===6 ) {
+    removeByEntry(entry: HashMapEntry<K, unknown>): HashMapEntry<K, V> | undefined {
+        const result = this.#bucket.removeByEntry(entry);
+        if (result !== undefined) {
+            if (this.#type === BucketType.Tree && this.size === 6) {
                 // console.log( "migrating to array bucket" );
-                this.#bucket = transferToNewBucket( this.#bucket, new ArrayHashMapBucket() );
+                this.#bucket = transferToNewBucket(this.#bucket, new ArrayHashMapBucket());
                 this.#type = BucketType.Array;
             }
         }
@@ -32,11 +32,11 @@ export class HybridHashMapBucket<K,V> extends HashMapBucket<K,V> {
     }
 
     setByEntry(entry: HashMapEntry<K, V>): boolean {
-        const result = this.#bucket.setByEntry( entry );
-        if( result ) {
-            if( this.#type===BucketType.Array && this.size===6 ) {
+        const result = this.#bucket.setByEntry(entry);
+        if (result) {
+            if (this.#type === BucketType.Array && this.size === 6) {
                 // console.log( "migrating to tree bucket" );
-                this.#bucket = transferToNewBucket( this.#bucket, new RBTreeHashMapBucket() );
+                this.#bucket = transferToNewBucket(this.#bucket, new RBTreeHashMapBucket());
                 this.#type = BucketType.Tree;
             }
         }
@@ -44,7 +44,7 @@ export class HybridHashMapBucket<K,V> extends HashMapBucket<K,V> {
     }
 }
 
-function transferToNewBucket<K,V>( oldBucket:HashMapBucket<K,V>, newBucket:HashMapBucket<K,V> ):HashMapBucket<K,V> {
-    for( const entry of oldBucket ) { newBucket.setByEntry( entry ); }
+function transferToNewBucket<K, V>(oldBucket: HashMapBucket<K, V>, newBucket: HashMapBucket<K, V>): HashMapBucket<K, V> {
+    for (const entry of oldBucket) { newBucket.setByEntry(entry); }
     return newBucket;
 }

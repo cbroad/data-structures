@@ -1,19 +1,19 @@
-const DataStructures = require( ".." );
+const DataStructures = require("..");
 const COUNT = 100;
 
 // const BinaryTree =  DataStructures.Structures.Trees.BinarySearchTree;
-const BinaryTree =  DataStructures.Structures.Trees.RedBlackTree;
+const BinaryTree = DataStructures.Structures.Trees.RedBlackTree;
 
 // const tree = new BinaryTree( { allowDupes:true, } );
-const tree = new BinaryTree( { allowDupes: true } );
+const tree = new BinaryTree({ allowDupes: true });
 
-for( let i=0 ; i<COUNT ; i++ ) {
-    if( Math.round( Math.random() ) ) {
-        let n = Math.floor( Math.random()*COUNT );
-        console.log( "adding %j", n );
-        tree.add( n );
+for (let i = 0; i < COUNT; i++) {
+    if (Math.round(Math.random())) {
+        let n = Math.floor(Math.random() * COUNT);
+        console.log("adding %j", n);
+        tree.add(n);
     } else {
-        if( tree.size>0 ) {
+        if (tree.size > 0) {
             // let arr = tree.toArray();
             // let n = arr[ Math.floor( Math.random()*tree.size ) ];
             // console.log( "removing %j", n );
@@ -31,13 +31,13 @@ for( let i=0 ; i<COUNT ; i++ ) {
 }
 
 
-for( const v of tree ) {
-    console.log( v );
+for (const v of tree) {
+    console.log(v);
 }
 
-console.log( "%s", tree ); // JSON representation.
-console.log( tree.toArray() );
-console.log( tree.size );
+console.log("%s", tree); // JSON representation.
+console.log(tree.toArray());
+console.log(tree.size);
 // console.log( tree.toArray() );
 
 // console.log( tree );

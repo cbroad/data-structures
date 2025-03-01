@@ -1,5 +1,5 @@
-export * from "./ArrayHashMap";
-export * from "./LinkedListHashMap";
-export * from "./TreeHashMap";
-export * from "./HybridHashMap";
-export { HybridHashMap as HashMap } from "./HybridHashMap";
+export * from "@/Implementations/Maps/HashMap/ArrayHashMap";
+export * from "@/Implementations/Maps/HashMap/LinkedListHashMap";
+export * from "@/Implementations/Maps/HashMap/TreeHashMap";
+export * from "@/Implementations/Maps/HashMap/HybridHashMap";
+export { HybridHashMap as HashMap } from "@/Implementations/Maps/HashMap/HybridHashMap";

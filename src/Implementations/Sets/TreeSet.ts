@@ -1,32 +1,33 @@
-import { AbstractCollection } from "../../Abstractions";
-import { CallbackFunction, OrderedCollectionParameters } from "../../Types";
-import { iteratorTransformer } from "../../Functions";
-import { BinaryTree, MySet } from "../../Interfaces";
-import { RedBlackTree } from "../BinaryTrees";
+import { AbstractCollection } from "@/Abstractions";
+import { iteratorTransformer } from "@/Functions";
+import { RedBlackTree } from "@/Implementations/BinaryTrees";
+
+import type { BinaryTree, MySet } from "@/Interfaces";
+import type { CallbackFunction, OrderedCollectionParameters } from "@/Types";
 
 export class TreeSet<T> extends AbstractCollection<T> implements MySet<T> {
-    #tree:BinaryTree<T>;
+    #tree: BinaryTree<T>;
 
     constructor();
-    constructor( params:OrderedCollectionParameters<T> );
-    constructor( params:OrderedCollectionParameters<T> = {} ) {
-        super( params );
-        this.#tree = new RedBlackTree( { ...params, allowDupes: false, overWriteDupes:false } );
+    constructor(params: OrderedCollectionParameters<T>);
+    constructor(params: OrderedCollectionParameters<T> = {}) {
+        super(params);
+        this.#tree = new RedBlackTree({ ...params, allowDupes: false, overWriteDupes: false });
     }
 
     get [Symbol.toStringTag](): string { return "TreeSet"; }
 
-    get size():number { return this.#tree.size };
+    get size(): number { return this.#tree.size };
 
-    [Symbol.iterator](): Iterator<T,any,undefined> {
+    [Symbol.iterator](): Iterator<T, any, undefined> {
         return this.values();
     }
 
-    add( value:T ):this;
-    add( value:T, confirm:true ):boolean;
-    add( value:T, confirm:boolean ):boolean|this;
-    add( value:T, confirm:boolean=false ):this|boolean  {
-        const result = this.#tree.add( value, confirm );
+    add(value: T): this;
+    add(value: T, confirm: true): boolean;
+    add(value: T, confirm: boolean): boolean | this;
+    add(value: T, confirm: boolean = false): this | boolean {
+        const result = this.#tree.add(value, confirm);
         return confirm ? result as boolean : this;
     }
 
@@ -35,21 +36,21 @@ export class TreeSet<T> extends AbstractCollection<T> implements MySet<T> {
     }
 
     remove(value: T): boolean {
-        return this.#tree.remove( value );
+        return this.#tree.remove(value);
     }
 
-    forEach(callbackfn: CallbackFunction<T,T,TreeSet<T>>, thisArg?: any): void {
-        for( const value of  this.#tree ) {
-            callbackfn.call( thisArg, value, value, this );
+    forEach(callbackfn: CallbackFunction<T, T, TreeSet<T>>, thisArg?: any): void {
+        for (const value of this.#tree) {
+            callbackfn.call(thisArg, value, value, this);
         }
     }
 
     has(value: T): boolean {
-        return this.#tree.contains( value );
+        return this.#tree.contains(value);
     }
 
     entries(): Iterator<[T, T], any, undefined> {
-        return iteratorTransformer( this.#tree[Symbol.iterator](), ((val:T)=>([val,val])) );
+        return iteratorTransformer(this.#tree[Symbol.iterator](), ((val: T) => ([val, val])));
     }
 
     *keys(): Iterator<T, any, undefined> { yield* this.#tree; }

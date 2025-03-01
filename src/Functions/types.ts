@@ -1,4 +1,3 @@
-
 export function isObject(val: any): val is object {
     return isType(val, "Object");
 }
@@ -6,7 +5,6 @@ export function isObject(val: any): val is object {
 export function isType(val: any, typeString: string) {
     return Object.prototype.toString.call(val) === `[object ${typeString}]`;
 }
-
 
 export function getType(val: any): string {
     const typeName = typeof (val);

@@ -35,9 +35,9 @@ export class BinaryTreeNode<T> implements Iterable<T> {
     }
 
     *[Symbol.iterator](): Iterator<T, any, undefined> {
-        if( this.left ) yield* this.left as BinaryTreeNode<T>;
-        if( this.value ) yield this.value;
-        if( this.right ) yield* this.right as BinaryTreeNode<T>;
+        if (this.left) yield* this.left as BinaryTreeNode<T>;
+        if (this.value) yield this.value;
+        if (this.right) yield* this.right as BinaryTreeNode<T>;
     }
 
     protected createNode(...args: any[]): BinaryTreeNode<T | undefined> {

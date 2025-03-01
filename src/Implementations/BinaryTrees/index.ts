@@ -1,2 +1,2 @@
-export * from "./BinarySearchTree";
-export * from "./RedBlackTree";
+export * from "@/Implementations/BinaryTrees/BinarySearchTree";
+export * from "@/Implementations/BinaryTrees/RedBlackTree";

@@ -1,7 +1,7 @@
-import { Collection } from "./Collection";
+import { Collection } from "@/Interfaces/Collection";
 
 export interface PriorityQueue<T> extends Collection<T> {
-    get first():T|undefined;
+    get first(): T | undefined;
 
-    poll():T|undefined;
+    poll(): T | undefined;
 }

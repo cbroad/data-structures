@@ -1,20 +1,20 @@
-import { Deque } from "../Interfaces";
-import { NotImplementedError } from "../NotImplementedError";
-import { AbstractQueue } from "./AbstractQueue";
+import { Deque } from "@/Interfaces";
+import { AbstractQueue } from "@/Abstractions/AbstractQueue";
+import { NotImplementedError } from "@/NotImplementedError";
 
 export abstract class AbstractDeque<T> extends AbstractQueue<T> implements Deque<T> {
     get last(): T | undefined { throw new NotImplementedError(); }
-    get top(): T|undefined { return this.last; }
+    get top(): T | undefined { return this.last; }
 
-    dequeue(): T|undefined { return this.shift(); }
+    dequeue(): T | undefined { return this.shift(); }
 
-    enqueue(value: T): boolean { return this.push( value ); }
+    enqueue(value: T): boolean { return this.push(value); }
 
     pop(): T | undefined { throw new NotImplementedError(); }
 
-    push(value: T): boolean { return this.add( value, true ); }
+    push(value: T): boolean { return this.add(value, true); }
 
     shift(): T | undefined { throw new NotImplementedError(); }
-    
+
     unshift(value: T): boolean { throw new NotImplementedError(); }
 }

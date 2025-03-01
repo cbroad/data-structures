@@ -1,9 +1,9 @@
-import { Collection } from "./Collection";
+import { Collection } from "@/Interfaces/Collection";
 
 export interface Queue<T> extends Collection<T> {
-    get first():T|undefined;
+    get first(): T | undefined;
 
-    dequeue():T|undefined;
-    enqueue( value:T ):boolean;
-    peek():T|undefined;
+    dequeue(): T | undefined;
+    enqueue(value: T): boolean;
+    peek(): T | undefined;
 }
