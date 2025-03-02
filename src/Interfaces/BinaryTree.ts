@@ -1,4 +1,4 @@
-import { Collection } from "@/Interfaces/Collection";
+import type { Collection } from "@/Interfaces/Collection";
 
 export interface BinaryTree<T> extends Collection<T> {
     get depth(): number;
