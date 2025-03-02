@@ -4,10 +4,10 @@ import { CallbackFunction } from "@/Types";
 export interface List<T> extends Collection<T> {
     /**
      * Iterates through collection, executing callback for every element.
-     * @param {(value: T, index: number, collection: Collection<T>)=>void} callbackfn - function to call
+     * @param {(value: T, index: number, collection: List<T>)=>void} callbackfn - function to call
      * @param {any} [thisArg] - this scope for callback function
      */
-    forEach(callbackfn: CallbackFunction<T, number, List<T>>, thisArg?: any): void;
+    forEach(callbackfn: CallbackFunction<T, number, Collection<T>>, thisArg?: any): void;
 
     /**
      * Retrieve the value from the given index in the List.

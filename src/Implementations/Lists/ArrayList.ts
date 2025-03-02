@@ -23,7 +23,7 @@ export class ArrayList<T> extends AbstractDeque<T> implements AsyncQueue<T>, Asy
         this.resetAsync();
     }
 
-    async *[Symbol.asyncIterator](): AsyncIterator<T, any, undefined> {
+    async *[Symbol.asyncIterator](): AsyncIterator<T> {
         let cleared: boolean = false;
         const onAbort = () => cleared = true;
         this._abortController.signal.addEventListener("abort", onAbort);
@@ -32,7 +32,7 @@ export class ArrayList<T> extends AbstractDeque<T> implements AsyncQueue<T>, Asy
         this._abortController.signal.removeEventListener("abort", onAbort);
     }
 
-    *[Symbol.iterator](): Iterator<T, any, undefined> {
+    *[Symbol.iterator](): Iterator<T> {
         yield* this._data;
     }
 

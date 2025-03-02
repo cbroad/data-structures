@@ -1,17 +1,18 @@
 // map;
+run();
 function run() {
-    DataStructures = require(".");
+    DataStructures = require("..");
 
     // const Map = DataStructures.Structures.Maps.HashMap;
     // const Map = DataStructures.Structures.Maps.HashMaps.ArrayHashMap;
     // const Map = DataStructures.Structures.Maps.HashMaps.HybridHashMap;
     // const Map = DataStructures.Structures.Maps.HashMaps.LinkedListHashMap;
     // const Map = DataStructures.Structures.Maps.HashMaps.TreeHashMap;
-    const Map = DataStructures.Structures.Maps.LinkedHashMap;
+    const MyMap = DataStructures.Structures.Maps.LinkedHashMap;
     // const Map = DataStructures.Structures.Maps.TreeMap;
 
     COUNT = 1000;
-    map = new Map();
+    map = new MyMap();
     // map = new DataStructures.Maps.HashMaps.LinkedHashMap();
     // map = new DataStructures.Maps.HashMaps.LLHashMap();
     // map = new DataStructures.Maps.HashMaps.RBHashMap();
@@ -21,6 +22,7 @@ function run() {
         map.set(i, String(i));
     }
     console.log(new Date());
+    console.log(new Map(map.entries()));
     for (let i = 0; i < COUNT; i += 2) {
         if ((i % 4) * (i % 6) === 0) {
             map.delete(i);

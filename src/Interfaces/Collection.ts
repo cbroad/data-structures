@@ -85,7 +85,7 @@ export interface Collection<T> extends Iterable<T> {
      * @param {(value: T, _value2: unknown, collection: Collection<T>)=>void} callbackfn - function to call
      * @param {any} [thisArg] - this scope for callback function
      */
-    forEach(callbackfn: CallbackFunction<T, unknown, Collection<T>>, thisArg?: any): void; // JS Set/Map                                                 // JS Set/Map
+    forEach(callbackfn: CallbackFunction<T, any, Collection<T>>, thisArg?: any): void; // JS Set/Map                                                 // JS Set/Map
 
     /**
      * Test if a value exists in the collection.

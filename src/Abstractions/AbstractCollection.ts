@@ -81,7 +81,7 @@ export abstract class AbstractCollection<T> extends EventEmitter implements Coll
         return thisSize === 0;
     }
 
-    forEach(callbackfn: CallbackFunction<T, unknown, Collection<T>>, thisArg?: any): void {
+    forEach(callbackfn: CallbackFunction<T, any, Collection<T>>, thisArg?: any): void {
         for (const value of this) {
             callbackfn.call(thisArg, value, value, this,);
         }
