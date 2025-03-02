@@ -4,4 +4,5 @@ export * from "@/Abstractions/AbstractHashMap";
 export * from "@/Abstractions/AbstractList";
 export * from "@/Abstractions/AbstractMap";
 export * from "@/Abstractions/AbstractMapBasedSet";
+export * from "@/Abstractions/AbstractSet";
 export * from "@/Abstractions/AbstractQueue";

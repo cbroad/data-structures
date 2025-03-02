@@ -51,6 +51,8 @@ export abstract class AbstractMap<K, V> implements MyMap<K, V>, Iterable<[K, V]>
         return arr;
     }
 
+    get JSMap(): Map<K, V> { return this as unknown as Map<K, V>; }
+
     get keysArray(): K[] { return this.entriesArray.map(entry => entry.key); }
     get size(): number { return this.entriesArray.length; }
     get valuesArray(): V[] { return this.entriesArray.map(entry => entry.value!); }

@@ -1,11 +1,11 @@
-import { AbstractCollection } from "@/Abstractions";
+import { AbstractSet } from "@/Abstractions";
 import { iteratorTransformer } from "@/Functions";
 import { RedBlackTree } from "@/Implementations/BinaryTrees";
 
 import type { BinaryTree, MySet } from "@/Interfaces";
 import type { CallbackFunction, OrderedCollectionParameters } from "@/Types";
 
-export class TreeSet<T> extends AbstractCollection<T> implements MySet<T> {
+export class TreeSet<T> extends AbstractSet<T> {
     #tree: BinaryTree<T>;
 
     constructor();
@@ -33,6 +33,10 @@ export class TreeSet<T> extends AbstractCollection<T> implements MySet<T> {
 
     clear(): void {
         return this.#tree.clear();
+    }
+
+    emptySet(): TreeSet<T> {
+        return new TreeSet<T>();
     }
 
     remove(value: T): boolean {

@@ -1,12 +1,19 @@
 import { AbstractCollection } from "@/Abstractions/AbstractCollection";
 import { NotImplementedError } from "@/NotImplementedError";
 
-import type { List } from "@/Interfaces";
+import type { Collection, List } from "@/Interfaces";
+import { CallbackFunction } from "@/Types";
 
 export abstract class AbstractList<T> extends AbstractCollection<T> implements List<T> {
 
     contains(value: T): boolean {
         return this.has(value);
+    }
+
+    forEach(callbackfn: CallbackFunction<T, number, List<T>>, thisArg?: any): void {
+        for (let i = 0; i < this.size; i++) {
+            callbackfn.call(thisArg, this.get(i)!, i, this,);
+        }
     }
 
     get(idx: Number): T | undefined {

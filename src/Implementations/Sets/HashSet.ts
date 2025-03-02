@@ -1,5 +1,6 @@
 import { AbstractMapBasedSet } from "@/Abstractions";
 import { HashMap } from "@/Implementations/Maps";
+import { MySet } from "@/Interfaces";
 
 import type { CollectionParameters } from "@/Types";
 
@@ -12,4 +13,8 @@ export class HashSet<T> extends AbstractMapBasedSet<T> {
     }
 
     get [Symbol.toStringTag](): string { return "HashSet"; }
+
+    emptySet(): HashSet<T> {
+        return new HashSet<T>();
+    }
 }

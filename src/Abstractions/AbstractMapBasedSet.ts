@@ -1,4 +1,4 @@
-import { AbstractCollection } from "@/Abstractions/AbstractCollection";
+import { AbstractSet } from "@/Abstractions/AbstractSet";
 
 import type { MyMap, MySet } from "@/Interfaces";
 import type { CollectionParameters, OrderedCollectionParameters } from "@/Types";
@@ -6,7 +6,7 @@ import type { CollectionParameters, OrderedCollectionParameters } from "@/Types"
 export type MapBasedSetParameters<T> = CollectionParameters<T> & { map: MyMap<T, undefined> };
 export type OrderedMapBasedSetParameters<T> = OrderedCollectionParameters<T> & { map: MyMap<T, undefined> }
 
-export abstract class AbstractMapBasedSet<T> extends AbstractCollection<T> implements MySet<T> {
+export abstract class AbstractMapBasedSet<T> extends AbstractSet<T> {
 
     #map: MyMap<T, undefined>;
 

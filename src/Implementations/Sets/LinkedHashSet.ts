@@ -13,4 +13,8 @@ export class LinkedHashSet<T> extends AbstractMapBasedSet<T> {
 
     get [Symbol.toStringTag](): string { return "LinkedHashSet"; }
 
+    emptySet(): LinkedHashSet<T> {
+        return new LinkedHashSet<T>();
+    }
+
 }

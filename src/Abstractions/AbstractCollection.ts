@@ -24,7 +24,7 @@ export abstract class AbstractCollection<T> extends EventEmitter implements Coll
     }
 
 
-    #starAll(values: Iterable<T>, func: FilterFunction<T>) {
+    #starAll(values: Iterable<T>, func: FilterFunction<T>): boolean {
         let result = true;
         for (const value of values) {
             result &&= func(value);
@@ -41,7 +41,11 @@ export abstract class AbstractCollection<T> extends EventEmitter implements Coll
         throw new NotImplementedError();
     }
 
-    addAll(values: Iterable<T>): boolean { return this.#starAll(values, (value: T) => this.add(value, true)); }
+    addAll(values: Iterable<T>): boolean {
+        const originalSize = this.size;
+        this.#starAll(values, (value: T) => this.add(value, true));
+        return this.size !== originalSize;
+    }
 
     clear(): void { this.removeAll(this.toArray()); }
 
@@ -53,9 +57,35 @@ export abstract class AbstractCollection<T> extends EventEmitter implements Coll
 
     entries(): Iterator<[T, T]> { return iteratorTransformer<T, [T, T]>(this[Symbol.iterator](), ((v: T) => ([v, v]))); }
 
-    equals(other: Collection<T>): boolean { throw new NotImplementedError(); }
+    equals<V>(other: Array<V> | Iterable<V> | Collection<V> | Set<V>): boolean {
+        const otherSize: number =
+            Array.isArray(other)
+                ? other.length
+                : other.hasOwnProperty("size")
+                    ? (other as Collection<T> | Set<T>).size
+                    : Number.NaN
+            ;
+        let thisSize = this.size;
+        if (Number.isNaN(otherSize) === false && thisSize !== otherSize) {
+            return false;
+        }
+        for (const e of other) {
+            thisSize--;
+            if (this.has(e as unknown as T) === false) {
+                return false;
+            }
+            if (thisSize < 0) {
+                return false;
+            }
+        }
+        return thisSize === 0;
+    }
 
-    forEach(callbackfn: CallbackFunction<T, T, Collection<T>>, thisArg?: any): void { for (const value of this) { callbackfn.call(thisArg, value, value, this,); } }
+    forEach(callbackfn: CallbackFunction<T, unknown, Collection<T>>, thisArg?: any): void {
+        for (const value of this) {
+            callbackfn.call(thisArg, value, value, this,);
+        }
+    }
 
     has(value: T): boolean {
         for (const element of this) {
@@ -66,13 +96,25 @@ export abstract class AbstractCollection<T> extends EventEmitter implements Coll
         return false;
     }
 
-    *keys(): Iterator<T> { yield* this; }
+    * keys(): Iterator<T> { yield* this; }
 
     remove(value: T): boolean { throw new NotImplementedError(); }
 
-    removeAll(values: Iterable<T>): boolean { return this.#starAll(values, this.remove.bind(this)); }
+    removeAll(values: Iterable<T>): boolean {
+        const originalSize = this.size;
+        this.#starAll(values, this.remove.bind(this));
+        return this.size !== originalSize;
+    }
 
-    removeIf(filterFunction: FilterFunction<T>): boolean { return this.removeAll(this.toArray().filter(filterFunction)); }
+    removeIf(filterFunction: FilterFunction<T>): boolean {
+        const toRemove = [];
+        for (const value of this) {
+            if (filterFunction(value)) {
+                toRemove.push(value);;
+            }
+        }
+        return this.removeAll(toRemove);
+    }
 
     retainAll(values: Iterable<T>): boolean {
         const toRemove: T[] = [];
@@ -103,7 +145,7 @@ export abstract class AbstractCollection<T> extends EventEmitter implements Coll
 
     toString(): string { return this.toJSON(); }
 
-    *values(): Iterator<T> { yield* this; }
+    * values(): Iterator<T> { yield* this; }
 }
 
 
