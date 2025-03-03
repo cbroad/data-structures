@@ -70,8 +70,6 @@ export abstract class AbstractAsyncQueue<T> extends AbstractQueue<T> implements 
         }
     }
 
-    peek(): T | undefined { return this.first; }
-
     resetAsync(): void {
         console.log("Resetting");
         if (this._abortController.signal.aborted) { this._abortController = new AbortController(); }

@@ -2,6 +2,7 @@ import { defaults as DefaultFunctions } from "@/Functions";
 import { ArrayList } from "@/Implementations/Lists/ArrayList";
 
 import type { AsyncPriorityQueue, PriorityQueue } from "@/Interfaces";
+import { NotImplementedError } from "@/NotImplementedError";
 import type { CompareFunction, OrderedCollectionParameters } from "@/Types";
 
 export class OrderedArrayList<T> extends ArrayList<T> implements AsyncPriorityQueue<T>, PriorityQueue<T> {
@@ -57,6 +58,8 @@ export class OrderedArrayList<T> extends ArrayList<T> implements AsyncPriorityQu
         return confirm ? true : this;
     }
 
+    enqueue(value: T): boolean { throw new NotImplementedError(); }
+
     has(value: T): boolean {
         return this.#indexOf(value) >= 0;
     }
@@ -75,10 +78,14 @@ export class OrderedArrayList<T> extends ArrayList<T> implements AsyncPriorityQu
         }
     }
 
+    push(value: T): boolean { throw new NotImplementedError(); }
+
     remove(value: T): boolean {
         const idx = this.#indexOf(value);
         if (idx < 0) { return false; }
         this._data.splice(idx, 1);
         return true;
     }
+
+    unshift(value: T): boolean { throw new NotImplementedError(); }
 }
